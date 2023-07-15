@@ -1,0 +1,15 @@
+        
+Technical Features
+1. Redux Toolkit with Async Thunk
+2. Authentication via passport JS
+3. REST API Auth via passport JWT
+4. Payments via Stripe
+5. Email via NodeMailer (Gmail)
+6. Mongoose Models/Populate
+7. Model View Controller on Backend
+
+
+This Project RoadMap Structure
+1st Step : Complete Front-end App
+2nd Step : Creating Backends
+3rd Step : Deploying on Vercel
