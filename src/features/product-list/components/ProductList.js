@@ -1,15 +1,9 @@
 import React,{ Fragment, useState } from 'react'
-// import  from 'react'
 import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon } from '@heroicons/react/20/solid'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
-
-const items = [
-  { id: 1, title: 'Back End Developer', department: 'Engineering', type: 'Full-time', location: 'Remote' },
-  { id: 2, title: 'Front End Developer', department: 'Engineering', type: 'Full-time', location: 'Remote' },
-  { id: 3, title: 'User Interface Designer', department: 'Design', type: 'Full-time', location: 'Remote' },
-]
+import { Link } from 'react-router-dom'
 
 
 const products = [
@@ -262,8 +256,6 @@ const ProductList = () => {
               <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
                 {/* Filters */}
                 <form className="hidden lg:block">
-                  
-
                   {filters.map((section) => (
                     <Disclosure as="div" key={section.id} className="border-b border-gray-200 py-6">
                       {({ open }) => (
@@ -315,7 +307,8 @@ const ProductList = () => {
                         
                         <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                           {products.map((product) => (
-                            <div key={product.id} className="group relative">
+                            <Link to={"/product-detail"} key={product.id}>
+                            <div  className="group relative">
                               <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
                                 <img
                                   src={product.imageSrc}
@@ -336,6 +329,7 @@ const ProductList = () => {
                                 <p className="text-sm font-medium text-gray-900">{product.price}</p>
                               </div>
                             </div>
+                            </Link>
                           ))}
                         </div>
                       </div>
