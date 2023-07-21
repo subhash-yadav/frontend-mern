@@ -2,6 +2,8 @@ import {  Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, ShoppingCartIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Link } from 'react-router-dom'
+import { selectItems } from '../cart/cartSlice'
+import { useSelector } from 'react-redux'
 
 const user = {
   name: 'Tom Cook',
@@ -14,15 +16,16 @@ const navigation = [
  
 ]
 const userNavigation = [
-  { name: 'My Profile', href: '#' },
-  { name: 'My Order', href: '#' },
-  { name: 'Sign out', href: '#' },
+  { name: 'My Profile', link: '#' },
+  { name: 'My Order', link: '#' },
+  { name: 'Sign out', link: '/login' },
 ]
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 const Navbar = ({children}) => {
+  const items = useSelector(selectItems);
   return (
     <>
     <div className="min-h-full">
@@ -70,7 +73,7 @@ const Navbar = ({children}) => {
                         <span className="sr-only">View notifications</span>
                         <ShoppingCartIcon className="h-7 w-7" aria-hidden="true" />
                         <span className="absolute top-[-10px] right-[-10px] items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
-                            10
+                            {items.length}
                         </span>
                       </Link>
 
@@ -95,15 +98,15 @@ const Navbar = ({children}) => {
                             {userNavigation.map((item) => (
                               <Menu.Item key={item.name}>
                                 {({ active }) => (
-                                  <a
-                                    href={item.href}
+                                  <Link
+                                    to={item.link}
                                     className={classNames(
                                       active ? 'bg-gray-100' : '',
                                       'block px-4 py-2 text-sm text-gray-700'
                                     )}
                                   >
                                     {item.name}
-                                  </a>
+                                  </Link>
                                 )}
                               </Menu.Item>
                             ))}
@@ -160,7 +163,7 @@ const Navbar = ({children}) => {
                       <span className="sr-only">View notifications</span>
                       <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
                       <span className="relative top-[-40px] right-[-15px] items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
-                        10
+                      {items.length > 0 ? items.length : '0'}
                       </span>
                     </button></Link>
                   </div>

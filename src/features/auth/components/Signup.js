@@ -1,9 +1,18 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { selectLoggedInUser,createUserAsync } from "../authSlice";
 
 const Signup = () => {
+  const dispatch = useDispatch();
+  const user = useSelector(selectLoggedInUser)
+  const {register,handleSubmit, formState: { errors }} = useForm();
+  console.log(errors,"error")
   return (
     <>
+    {user && <Navigate to={"/"} replace={true}></Navigate>}
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
@@ -17,23 +26,24 @@ const Signup = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
+          <form className="space-y-6" noValidate onSubmit={handleSubmit((data)=>{
+            dispatch(createUserAsync({email:data.email,password:data.password,address:[]}))
+          })}>
             <div>
               <label
                 htmlFor="email"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
-                Email address
+                Email address <span className="text-xs text-gray-500">*</span>
               </label>
               <div className="mt-2">
                 <input
                   id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
+                  {...register("email",{required:"email required",pattern:{value:/\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi,message:"email not valid"}})}
+                  type="email"                  
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
+                {errors.email && <span className="text-red-500 text-base">*{errors.email.message}</span>}
               </div>
             </div>
 
@@ -43,18 +53,19 @@ const Signup = () => {
                   htmlFor="password"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
-                  Password
+                  Password <span className="text-xs text-gray-500">*</span>
                 </label>
               </div>
               <div className="mt-2">
                 <input
                   id="password"
-                  name="password"
-                  type="password"
-                  autoComplete="current-password"
-                  required
+                  {...register("password",{required:"password required",pattern:{value:/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm,message:`-at least 8 characters \n
+                  -must contain at least 1 uppercase letter and 1 number \n
+                  -can contain special character`}})}
+                  type="password"                  
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
+                {errors.password && <span className="text-red-500 text-base">*{errors.password.message}</span>}
               </div>
             </div>
             <div>
@@ -63,18 +74,17 @@ const Signup = () => {
                   htmlFor="password"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
-                  Confirm Password
+                  Confirm Password <span className="text-xs text-gray-500">*</span>
                 </label>
               </div>
               <div className="mt-2">
                 <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  autoComplete="current-password"
-                  required
+                  id="confirmPassword"
+                  {...register("confirmPassword",{required:"confirm password is required",validate: (value, formValues) => value === formValues.password || 'password not matching'})}
+                  type="password"                  
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
+                {errors.confirmPassword && <span className="text-red-500 text-base">*{errors.confirmPassword.message}</span>}
               </div>
             </div>
 
@@ -83,7 +93,7 @@ const Signup = () => {
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Sign in
+                Sign Up
               </button>
             </div>
           </form>

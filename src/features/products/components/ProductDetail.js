@@ -3,7 +3,9 @@ import { StarIcon } from "@heroicons/react/20/solid";
 import { RadioGroup } from "@headlessui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProductByIdAsync } from "../productSlice";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { addToCartAsync } from "../../cart/cartSlice";
+import { selectLoggedInUser } from "../../auth/authSlice";
 
 //TODO In server data we will add colors, size, highlights. to each products
 const colors= [
@@ -38,14 +40,19 @@ const ProductDetail = () => {
   const [selectedColor, setSelectedColor] = useState(colors[0]);
   const [selectedSize, setSelectedSize] = useState(sizes[2]);
   const {selectedProduct} = useSelector((state)=>state.products);
- 
-
+ const user = useSelector(selectLoggedInUser)
   useEffect(()=>{
     dispatch(fetchProductByIdAsync(id))
   },[dispatch,id])
 
   //TODO : In server data we will add colors , sizes, Highlights etc.
-
+const handleCart = (e) =>{
+  // e.stopPropagation();
+  e.preventDefault();
+  const newItem = {...selectedProduct,quantity:1,user:user.id}
+  delete newItem[id];
+dispatch(addToCartAsync(newItem))
+}
   return (
     <div>
       {selectedProduct && <div className="bg-white">
@@ -135,7 +142,7 @@ const ProductDetail = () => {
             <div className="mt-4 lg:row-span-3 lg:mt-0">
               <h2 className="sr-only">Product information</h2>
               <p className="text-3xl tracking-tight text-gray-900">
-                {selectedProduct.price}
+                Price: ${selectedProduct.price}
               </p>
 
               {/* Reviews */}
@@ -208,12 +215,12 @@ const ProductDetail = () => {
                 <div className="mt-10">
                   <div className="flex items-center justify-between">
                     <h3 className="text-sm font-medium text-gray-900">Size</h3>
-                    <a
-                      href="#"
+                    <Link
+                      to={'/'}
                       className="text-sm font-medium text-indigo-600 hover:text-indigo-500"
                     >
                       Size guide
-                    </a>
+                    </Link>
                   </div>
 
                   <RadioGroup
@@ -286,6 +293,7 @@ const ProductDetail = () => {
                 </div>
 
                 <button
+                onClick={handleCart}
                   type="submit"
                   className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
