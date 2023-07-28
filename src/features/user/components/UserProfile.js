@@ -14,7 +14,7 @@ const UserProfile = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-
+//We will add payment section when we work on backend
   const [newAddress, setNewAddress] = useState(false);
   const handleNewAddress = () =>{
     setNewAddress(!newAddress)
