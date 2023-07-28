@@ -35,7 +35,6 @@ function classNames(...classes) {
 const ProductDetail = () => {
   const dispatch = useDispatch();
   const {id} = useParams()
-  console.log(id,"id")
 
   const [selectedColor, setSelectedColor] = useState(colors[0]);
   const [selectedSize, setSelectedSize] = useState(sizes[2]);
@@ -47,11 +46,13 @@ const ProductDetail = () => {
 
   //TODO : In server data we will add colors , sizes, Highlights etc.
 const handleCart = (e) =>{
-  // e.stopPropagation();
   e.preventDefault();
+  e.stopPropagation()
   const newItem = {...selectedProduct,quantity:1,user:user.id}
   delete newItem[id];
-dispatch(addToCartAsync(newItem))
+  if(selectedProduct){
+    dispatch(addToCartAsync(newItem))
+  }
 }
   return (
     <div>

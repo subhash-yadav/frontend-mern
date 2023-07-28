@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteItemAsync, selectItems, updateCartAsync } from "./cartSlice";
 
@@ -18,6 +18,7 @@ const Cart = () => {
   };
   return (
     <>
+    {!items.length && <Navigate to={"/"}/>}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <h2 className="text-4xl mx-auto max-w-7xl py-4 sm:px-6 lg:px-8">
           Cart

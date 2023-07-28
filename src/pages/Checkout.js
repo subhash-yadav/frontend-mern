@@ -8,10 +8,11 @@ import {
 } from "../features/cart/cartSlice";
 import { useForm } from "react-hook-form";
 import {
-  selectLoggedInUser,
-  updateUserAsync,
+   
 } from "../features/auth/authSlice";
-import {createOrderAsync } from "../features/order/orderSlice";
+import { updateUserAsync } from "../features/user/userSlice";
+import { createOrderAsync, selectCurrentOrder } from "../features/order/orderSlice";
+import { selectUserInfo } from "../features/user/userSlice";
 
 const Checkout = () => {
   const {
@@ -22,13 +23,15 @@ const Checkout = () => {
   } = useForm();
 
   const dispatch = useDispatch();
-  const user = useSelector(selectLoggedInUser);
+  const user = useSelector(selectUserInfo);
   const items = useSelector(selectItems);
 
   const [open, setOpen] = useState(true);
   const totalAmount = items.reduce(
-    (amount, item) => item.price * item.quantity + amount,0);
-    
+    (amount, item) => item.price * item.quantity + amount,
+    0
+  );
+
   const totalItems = items.reduce((total, item) => item.quantity + total, 0);
   const handleQuantity = (e, item) => {
     dispatch(updateCartAsync({ ...item, quantity: +e.target.value }));
@@ -41,12 +44,27 @@ const Checkout = () => {
 
   const [payment, setPayment] = useState(null);
   const handlePayment = (e) => {
-    setPayment(e.target.value)
+    setPayment(e.target.value);
   };
 
-  const handleOrder = () => {
-    const order = {items:items,totalAmount:totalAmount,totalItems:totalItems,user:user,paymentMethod:payment,selectedAddress:selectedAddress}
-    dispatch(createOrderAsync(order))
+  const currentOrder = useSelector(selectCurrentOrder)
+  const handleOrder = (e) => {
+    if (selectedAddress && payment) {
+      const order = {
+        items: items,
+        totalAmount: totalAmount,
+        totalItems: totalItems,
+        user: user,
+        paymentMethod: payment,
+        selectedAddress: selectedAddress,
+        status:"pending" //other status can be delivered , received
+      };
+      dispatch(createOrderAsync(order));
+      // need to redirect from here to a new page of order success
+    } else {
+      //TODO : we can use proper messaging popup here
+      alert("Enter Address and Payment method");
+    }
     //TODO : redirect to order-success page
     //TODO : clear cart after order
     //TODO : on server change the stock number of items
@@ -54,6 +72,7 @@ const Checkout = () => {
   return (
     <>
       {!items.length && <Navigate to={"/"} />}
+      {currentOrder && <Navigate to={`/order-success/${currentOrder.id}`} />}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-5">
           <div className="lg:col-span-3">

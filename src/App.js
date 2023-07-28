@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import "./App.css";
+import React, { useEffect, useState } from "react";
 import Home from "./pages/Home";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
@@ -12,6 +11,11 @@ import Protected from "./features/auth/components/Protected";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchItemsByUserIdAsync } from "./features/cart/cartSlice";
 import { selectLoggedInUser } from "./features/auth/authSlice";
+import PageNotFound from "./pages/404";
+import OrderSuccessPage from "./pages/OrderSuccessPage";
+import UserOrderPage from "./pages/UserOrderPage";
+import UserProfilePage from "./pages/UserProfilePage";
+import { fetchLoggedInUserAsync } from "./features/user/userSlice";
 
 const router = createBrowserRouter([
   {
@@ -54,16 +58,51 @@ const router = createBrowserRouter([
       </Protected>
     ),
   },
+  {
+    path: "/order-success/:id",
+    element: (
+      <>
+        <OrderSuccessPage />
+      </>
+    ),
+  },
+  {
+    path: "/orders",
+    element: (
+      <>
+        <UserOrderPage />
+        {/* //we will add page later right now using component directly */}
+      </>
+    ),
+  },
+  {
+    path: "/profile",
+    element: (
+      <>
+        <UserProfilePage />
+        {/* //we will add page later right now using component directly */}
+      </>
+    ),
+  },
+  {
+    path: "*",
+    element: (
+      <>
+        <PageNotFound />
+      </>
+    ),
+  },
 ]);
 
 function App() {
-  const dispatch = useDispatch()
-  const user = useSelector(selectLoggedInUser)
-useEffect(()=>{
-  if(user){
-    dispatch(fetchItemsByUserIdAsync(user.id))
-  }
-},[dispatch,user])
+  const dispatch = useDispatch();
+  const user = useSelector(selectLoggedInUser);
+  useEffect(() => {
+    if (user) {
+      dispatch(fetchItemsByUserIdAsync(user.id));
+      dispatch(fetchLoggedInUserAsync(user.id))
+    }
+  }, [dispatch, user]);
   return (
     <>
       <RouterProvider router={router} />

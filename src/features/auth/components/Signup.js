@@ -9,7 +9,6 @@ const Signup = () => {
   const dispatch = useDispatch();
   const user = useSelector(selectLoggedInUser)
   const {register,handleSubmit, formState: { errors }} = useForm();
-  console.log(errors,"error")
   return (
     <>
     {user && <Navigate to={"/"} replace={true}></Navigate>}
