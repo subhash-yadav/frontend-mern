@@ -4,15 +4,13 @@ import { Bars3Icon, ShoppingCartIcon, XMarkIcon } from '@heroicons/react/24/outl
 import { Link } from 'react-router-dom'
 import { selectItems } from '../cart/cartSlice'
 import { useSelector } from 'react-redux'
+import { selectLoggedInUser } from '../auth/authSlice'
 
-const user = {
-  name: 'Tom Cook',
-  email: 'tom@example.com',
-  imageUrl:
-    'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-}
+
 const navigation = [
-  { name: 'Home', to: '/', current: true },
+  { name: 'Home', to: '/',current: true, user: true },
+  { name: 'Admin', to: '/admin', admin: true },
+  { name: 'Order', to: '/admin/order', admin: true },
  
 ]
 const userNavigation = [
@@ -26,6 +24,7 @@ function classNames(...classes) {
 }
 const Navbar = ({children}) => {
   const items = useSelector(selectItems);
+  const user = useSelector(selectLoggedInUser)
   return (
     <>
     <div className="min-h-full">
@@ -47,7 +46,7 @@ const Navbar = ({children}) => {
                     <div className="hidden md:block">
                       <div className="ml-10 flex items-baseline space-x-4">
                         {navigation.map((item) => (
-                          <Link
+                          item[user?.role] && <Link
                             key={item.name}
                             to={item.to}
                             className={classNames(

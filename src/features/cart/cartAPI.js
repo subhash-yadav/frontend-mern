@@ -28,14 +28,15 @@ export function updateCart(update) {
     resolve({ data });
   });
 }
-export function deleteItem(itemId) {
+export function deleteItem(id) {
   return new Promise(async (resolve) => {
-    const response = await fetch("http://localhost:8080/cart/" + itemId, {
+    console.log(id)
+    const response = await fetch("http://localhost:8080/cart/" +id, {
       method: "DELETE",
       headers: { "content-type": "application/json" },
     });
     const data = await response.json();
-    resolve({ data});
+    resolve({ data: {id : id}});
   });
 }
 

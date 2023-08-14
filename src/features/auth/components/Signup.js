@@ -26,7 +26,7 @@ const Signup = () => {
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form className="space-y-6" noValidate onSubmit={handleSubmit((data)=>{
-            dispatch(createUserAsync({email:data.email,password:data.password,address:[]}))
+            dispatch(createUserAsync({email:data.email,password:data.password,address:[],role:"user"}))
           })}>
             <div>
               <label

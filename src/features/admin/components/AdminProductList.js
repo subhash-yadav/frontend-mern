@@ -16,12 +16,12 @@ import {
   fetchAllCategoriesAsync,
   fetchProductsByFiltersAsync,
   selectStatus,
-} from "../productSlice";
+} from "../../products/productSlice";
 import Pagination from "../../common/Pagination";
 import Loader from "../../common/Loader";
-// import DesktopFilter from "../../common/DesktopFilter";
-// import ProductGrid from "../../common/ProductGrid";
 // import MobileFilter from "../../common/MobileFilter";
+// import ProductGrid from "../../common/ProductGrid";
+// import DesktopFilter from "../../common/DesktopFilter";
 
 const sortOptions = [
   { name: "Best Rating", sort: "rating", order: "desc", current: false },
@@ -33,14 +33,14 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const ProductList = () => {
+const AdminProductList = () => {
   const dispatch = useDispatch();
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
-  const status = useSelector(selectStatus)
+
   const { products, totalItems, categories, brands } = useSelector(
     (state) => state.products
   );
- 
+  const status = useSelector(selectStatus);
   const filters = [
     {
       id: "category",
@@ -87,7 +87,6 @@ const ProductList = () => {
   useEffect(() => {
     const pagination = { _page: page, _limit: ITEMS_PER_PAGE };
     dispatch(fetchProductsByFiltersAsync({ filter, sort, pagination }));
-    //Server will filter the deleted products
   }, [dispatch, filter, sort, page]);
 
   useEffect(() => {
@@ -98,16 +97,12 @@ const ProductList = () => {
     dispatch(fetchAllBrandAsync());
     dispatch(fetchAllCategoriesAsync());
   }, [dispatch]);
-  
-  const [query,setQuery] = useState("")
-  console.log(query)
-  const key = ['title',"category","brand"]
-  const search = (data)=>{
-    return data.filter((item)=> key.some(key=>item[key].toLowerCase().includes(query)))
-  }
-   return (
+
+  return (
     <>
-    
+    {
+      status === "loading" ? <Loader/> : null
+    }
       <div className="bg-white">
         <div>
           {/* Mobile filter dialog */}
@@ -123,7 +118,7 @@ const ProductList = () => {
               <h1 className="text-4xl font-bold tracking-tight text-gray-900">
                 All Products
               </h1>
-              <input type="text" onChange={(e)=>setQuery(e.target.value)} className="rounded-full w-1/2 hidden md:block" placeholder="Search..."/>
+
               <div className="flex items-center">
                 <Menu as="div" className="relative inline-block text-left">
                   <div>
@@ -196,8 +191,17 @@ const ProductList = () => {
               <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
                 {/* Filters */}
                 <DesktopFilter handleFilter={handleFilter} filters={filters} />
-
-                <ProductGrid  products={search(products)} status={status}/>
+                <div className="lg:col-span-3">
+                  <div className="">
+                    <Link
+                      to={"/admin/product-form"}
+                      className="rounded-md mx-8 bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    >
+                      Add New Product
+                    </Link>
+                  </div>
+                  <ProductGrid products={products} />
+                </div>
               </div>
             </section>
 
@@ -216,7 +220,7 @@ const ProductList = () => {
   );
 };
 
-export default ProductList;
+export default AdminProductList;
 
 function MobileFilter({
   mobileFiltersOpen,
@@ -395,8 +399,7 @@ function DesktopFilter({ handleFilter, filters }) {
   );
 }
 
-//Pagination
-function ProductGrid({ products ,status}) {
+function ProductGrid({ products }) {
   return (
     <>
       {/* Product grid start*/}
@@ -404,51 +407,64 @@ function ProductGrid({ products ,status}) {
         <div className="bg-white">
           <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-0 lg:max-w-7xl lg:px-8">
             <div className="mt-6 grid grid-cols-1 gap-x-4 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
-              {
-                status === "loading" && <Loader/>
-              }
               {products.map((product) => (
-                <Link to={`/product-detail/${product.id}`} key={product.id}>
-                  <div className="group relative border border-1 border-gray-200 p-2 rounded-md">
-                    <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-60">
-                      <img
-                        src={product.thumbnail}
-                        alt={product.title}
-                        className="h-full w-full object-cover object-center lg:h-full lg:w-full"
-                      />
-                    </div>
-                    <div className="mt-4 flex justify-between items-center gap-4">
-                      <div>
-                        <div className="text-sm text-gray-700 ">
-                          <h3 href={product.thumbnail}>
-                            <span
-                              aria-hidden="true"
-                              className="absolute inset-0 "
-                            />
-                            {product.title}
-                          </h3>
+                <div key={product.id}>
+                  <Link to={`/product-detail/${product.id}`} key={product.id}>
+                    <div className="group relative border border-1 border-gray-200 p-2 rounded-md">
+                      <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-60">
+                        <img
+                          src={product.thumbnail}
+                          alt={product.title}
+                          className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                        />
+                      </div>
+                      <div className="mt-4 flex justify-between items-center gap-4">
+                        <div>
+                          <div className="text-sm text-gray-700 ">
+                            <h3 href={product.thumbnail}>
+                              <span
+                                aria-hidden="true"
+                                className="absolute inset-0 "
+                              />
+                              {product.title}
+                            </h3>
+                          </div>
+                          <p className="mt-1 text-sm text-gray-500 flex justify-start gap-3 items-center">
+                            <StarIcon className="w-6 h-6" /> {product.rating}
+                          </p>
                         </div>
-                        <p className="mt-1 text-sm text-gray-500 flex justify-start gap-3 items-center">
-                          <StarIcon className="w-6 h-6" /> {product.rating}
+                        <div>
+                          <p className="text-sm font-medium text-gray-900">
+                            <span className=" line-through text-gray-400">
+                              $ {product.price}
+                            </span>{" "}
+                            - <span>{product.discountPercentage}%</span>
+                          </p>
+                          <p className="text-sm font-medium text-gray-900">
+                          $
+                          {
+                            discountedPrice(product)
+                          }
                         </p>
+                        </div>
                       </div>
-                      <div>
-                        <p className="text-sm font-medium text-gray-900">
-                          <span className=" line-through text-gray-400">
-                            $ {product.price}
-                          </span>{" "}
-                          - <span>{product.discountPercentage}%</span>
-                        </p>
-                        <p className="text-sm font-medium text-gray-900">
-                          ${discountedPrice(product)}
-                        </p>
-                      </div>
-                    </div>
-                    {product.stock <= 0 && (
+                      {product.deleted && (
+                        <p className="text-red-500 text-sm">product deleted</p>
+                      )}
+                      {product.stock <= 0 && (
                         <p className="text-red-500 text-sm">Out of Stock</p>
                       )}
+                    </div>
+                  </Link>
+                  <div>
+                    <Link
+                      to={`/admin/product-form/edit/${product.id}`}
+                      className="border block w-full cursor-pointer text-center rounded bg-teal-800 text-white text-xl py-1 mt-1 hover:bg-teal-600 hover:duration-300 ease-in-out"
+                    >
+                      Edit
+                    </Link>
                   </div>
-                </Link>
+                </div>
               ))}
             </div>
           </div>

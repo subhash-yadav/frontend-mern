@@ -54,6 +54,9 @@ const UserProfile = () => {
         <p className="pb-4 text-red-900 text-2xl font-bold">
           Email: {user.email}
         </p>
+        {user.role === "admin" && <p className="pb-4 text-red-900 text-2xl font-bold">
+          Role: {user.role}
+        </p>}
 
         <div className="border-b border-gray-900/10 pb-12">
           <div>

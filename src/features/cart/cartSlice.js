@@ -48,7 +48,7 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     increment: (state) => {
-      state.value += 1;
+      
     },
   },
   extraReducers: (builder) => {
@@ -80,6 +80,7 @@ export const cartSlice = createSlice({
       })
       .addCase(deleteItemAsync.fulfilled, (state, action) => {
         state.status = 'idle';
+        console.log(action.payload)
         const index = state.items.findIndex(item=>item.id === action.payload.id)
         state.items.splice(index,1)
       })
@@ -95,4 +96,5 @@ export const cartSlice = createSlice({
 
 export const { increment } = cartSlice.actions;
 export const selectItems = (state)=>state.cart.items
+export const selectCartStatus = (state) => state.cart.status
 export default cartSlice.reducer;

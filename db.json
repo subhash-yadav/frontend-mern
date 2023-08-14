@@ -2,49 +2,29 @@
   "products": [
     {
       "id": 1,
-      "title": "iPhone 9",
+      "title": "i123",
       "description": "An apple mobile which is nothing like apple",
       "price": 549,
-      "discountPercentage": 12.96,
-      "rating": 4.69,
-      "stock": 94,
+      "discountPercentage": 1,
+      "rating": 0,
+      "stock": 0,
       "brand": "Apple",
       "category": "smartphones",
       "thumbnail": "https://i.dummyjson.com/data/products/1/thumbnail.jpg",
       "images": [
         "https://i.dummyjson.com/data/products/1/1.jpg",
         "https://i.dummyjson.com/data/products/1/2.jpg",
-        "https://i.dummyjson.com/data/products/1/3.jpg",
-        "https://i.dummyjson.com/data/products/1/4.jpg",
-        "https://i.dummyjson.com/data/products/1/thumbnail.jpg"
-      ]
-    },
-    {
-      "id": 101,
-      "title": "iPhone 9",
-      "description": "An apple mobile which is nothing like apple",
-      "price": 549,
-      "discountPercentage": 12.96,
-      "rating": 4.69,
-      "stock": 94,
-      "brand": "Apple",
-      "category": "smartphones",
-      "thumbnail": "https://i.dummyjson.com/data/products/1/thumbnail.jpg",
-      "images": [
-        "https://i.dummyjson.com/data/products/1/1.jpg",
-        "https://i.dummyjson.com/data/products/1/2.jpg",
-        "https://i.dummyjson.com/data/products/1/3.jpg",
-        "https://i.dummyjson.com/data/products/1/4.jpg",
-        "https://i.dummyjson.com/data/products/1/thumbnail.jpg"
-      ]
+        "https://i.dummyjson.com/data/products/1/3.jpg"
+      ],
+      "deleted": true
     },
     {
       "id": 2,
       "title": "iPhone X",
       "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
       "price": 899,
-      "discountPercentage": 17.94,
-      "rating": 4.44,
+      "discountPercentage": 12,
+      "rating": 0,
       "stock": 34,
       "brand": "Apple",
       "category": "smartphones",
@@ -52,9 +32,9 @@
       "images": [
         "https://i.dummyjson.com/data/products/2/1.jpg",
         "https://i.dummyjson.com/data/products/2/2.jpg",
-        "https://i.dummyjson.com/data/products/2/3.jpg",
-        "https://i.dummyjson.com/data/products/2/thumbnail.jpg"
-      ]
+        "https://i.dummyjson.com/data/products/2/3.jpg"
+      ],
+      "deleted": true
     },
     {
       "id": 3,
@@ -69,7 +49,8 @@
       "thumbnail": "https://i.dummyjson.com/data/products/3/thumbnail.jpg",
       "images": [
         "https://i.dummyjson.com/data/products/3/1.jpg"
-      ]
+      ],
+      "deleted": true
     },
     {
       "id": 4,
@@ -88,14 +69,15 @@
         "https://i.dummyjson.com/data/products/4/3.jpg",
         "https://i.dummyjson.com/data/products/4/4.jpg",
         "https://i.dummyjson.com/data/products/4/thumbnail.jpg"
-      ]
+      ],
+      "deleted": true
     },
     {
       "id": 5,
-      "title": "Huawei P30",
+      "title": "Huawei P30000",
       "description": "Huawei’s re-badged P30 Pro New Edition was officially unveiled yesterday in Germany and now the device has made its way to the UK.",
-      "price": 499,
-      "discountPercentage": 10.58,
+      "price": 4990000000000,
+      "discountPercentage": 1,
       "rating": 4.09,
       "stock": 32,
       "brand": "Huawei",
@@ -105,7 +87,8 @@
         "https://i.dummyjson.com/data/products/5/1.jpg",
         "https://i.dummyjson.com/data/products/5/2.jpg",
         "https://i.dummyjson.com/data/products/5/3.jpg"
-      ]
+      ],
+      "deleted": true
     },
     {
       "id": 6,
@@ -123,7 +106,8 @@
         "https://i.dummyjson.com/data/products/6/2.jpg",
         "https://i.dummyjson.com/data/products/6/3.png",
         "https://i.dummyjson.com/data/products/6/4.jpg"
-      ]
+      ],
+      "deleted": true
     },
     {
       "id": 7,
@@ -2357,6 +2341,7 @@
     {
       "email": "subu123@gmail.com",
       "password": "Asdf123@",
+      "role": "user",
       "address": [
         {
           "name": "Subhash Kumar Yadavvv",
@@ -2378,100 +2363,205 @@
         }
       ],
       "id": 1
+    },
+    {
+      "email": "admin@gmail.com",
+      "password": "Admin123",
+      "address": [],
+      "role": "admin",
+      "id": 2
+    },
+    {
+      "email": "test@gmail.com",
+      "password": "Test@123",
+      "address": [
+        {
+          "name": "Ajay mandal",
+          "email": "ajay@gmail.com",
+          "phone": "21324235",
+          "street": "ksdjhfj",
+          "city": "rajbiraj",
+          "state": "madhesh",
+          "pinCode": "5245"
+        }
+      ],
+      "role": "user",
+      "id": 3
+    },
+    {
+      "email": "check@gmail.com",
+      "password": "Check123",
+      "address": [],
+      "role": "user",
+      "id": 4
     }
   ],
-  "cart": [],
+  "cart": [
+    {
+      "id": 1,
+      "title": "i123",
+      "description": "An apple mobile which is nothing like apple",
+      "price": 549,
+      "discountPercentage": 1,
+      "rating": 0,
+      "stock": 94,
+      "brand": "Apple",
+      "category": "smartphones",
+      "thumbnail": "https://i.dummyjson.com/data/products/1/thumbnail.jpg",
+      "images": [
+        "https://i.dummyjson.com/data/products/1/1.jpg",
+        "https://i.dummyjson.com/data/products/1/2.jpg",
+        "https://i.dummyjson.com/data/products/1/3.jpg"
+      ],
+      "deleted": true,
+      "quantity": 1,
+      "user": 4
+    },
+    {
+      "id": 2,
+      "title": "iPhone X",
+      "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
+      "price": 899,
+      "discountPercentage": 17.94,
+      "rating": 4.44,
+      "stock": 34,
+      "brand": "Apple",
+      "category": "smartphones",
+      "thumbnail": "https://i.dummyjson.com/data/products/2/thumbnail.jpg",
+      "images": [
+        "https://i.dummyjson.com/data/products/2/1.jpg",
+        "https://i.dummyjson.com/data/products/2/2.jpg",
+        "https://i.dummyjson.com/data/products/2/3.jpg",
+        "https://i.dummyjson.com/data/products/2/thumbnail.jpg"
+      ],
+      "quantity": 1,
+      "user": 2
+    },
+    {
+      "id": 9,
+      "title": "Infinix INBOOK",
+      "description": "Infinix Inbook X1 Ci3 10th 8GB 256GB 14 Win10 Grey – 1 Year Warranty",
+      "price": 1099,
+      "discountPercentage": 11.83,
+      "rating": 4.54,
+      "stock": 96,
+      "brand": "Infinix",
+      "category": "laptops",
+      "thumbnail": "https://i.dummyjson.com/data/products/9/thumbnail.jpg",
+      "images": [
+        "https://i.dummyjson.com/data/products/9/1.jpg",
+        "https://i.dummyjson.com/data/products/9/2.png",
+        "https://i.dummyjson.com/data/products/9/3.png",
+        "https://i.dummyjson.com/data/products/9/4.jpg",
+        "https://i.dummyjson.com/data/products/9/thumbnail.jpg"
+      ],
+      "quantity": 1,
+      "user": 3
+    },
+    {
+      "id": 10,
+      "title": "HP Pavilion 15-DK1056WM",
+      "description": "HP Pavilion 15-DK1056WM Gaming Laptop 10th Gen Core i5, 8GB, 256GB SSD, GTX 1650 4GB, Windows 10",
+      "price": 1099,
+      "discountPercentage": 6.18,
+      "rating": 4.43,
+      "stock": 89,
+      "brand": "HP Pavilion",
+      "category": "laptops",
+      "thumbnail": "https://i.dummyjson.com/data/products/10/thumbnail.jpeg",
+      "images": [
+        "https://i.dummyjson.com/data/products/10/1.jpg",
+        "https://i.dummyjson.com/data/products/10/2.jpg",
+        "https://i.dummyjson.com/data/products/10/3.jpg",
+        "https://i.dummyjson.com/data/products/10/thumbnail.jpeg"
+      ],
+      "quantity": 1,
+      "user": 3
+    },
+    {
+      "id": 11,
+      "title": "perfume Oil",
+      "description": "Mega Discount, Impression of Acqua Di Gio by GiorgioArmani concentrated attar perfume Oil",
+      "price": 13,
+      "discountPercentage": 8.4,
+      "rating": 4.26,
+      "stock": 65,
+      "brand": "Impression of Acqua Di Gio",
+      "category": "fragrances",
+      "thumbnail": "https://i.dummyjson.com/data/products/11/thumbnail.jpg",
+      "images": [
+        "https://i.dummyjson.com/data/products/11/1.jpg",
+        "https://i.dummyjson.com/data/products/11/2.jpg",
+        "https://i.dummyjson.com/data/products/11/3.jpg",
+        "https://i.dummyjson.com/data/products/11/thumbnail.jpg"
+      ],
+      "quantity": 1,
+      "user": 3
+    }
+  ],
   "order": [
     {
       "items": [
         {
-          "id": 2,
-          "title": "iPhone X",
-          "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
-          "price": 899,
-          "discountPercentage": 17.94,
-          "rating": 4.44,
-          "stock": 34,
+          "id": 1,
+          "title": "i123",
+          "description": "An apple mobile which is nothing like apple",
+          "price": 549,
+          "discountPercentage": 1,
+          "rating": 0,
+          "stock": 94,
           "brand": "Apple",
           "category": "smartphones",
-          "thumbnail": "https://i.dummyjson.com/data/products/2/thumbnail.jpg",
+          "thumbnail": "https://i.dummyjson.com/data/products/1/thumbnail.jpg",
           "images": [
-            "https://i.dummyjson.com/data/products/2/1.jpg",
-            "https://i.dummyjson.com/data/products/2/2.jpg",
-            "https://i.dummyjson.com/data/products/2/3.jpg",
-            "https://i.dummyjson.com/data/products/2/thumbnail.jpg"
+            "https://i.dummyjson.com/data/products/1/1.jpg",
+            "https://i.dummyjson.com/data/products/1/2.jpg",
+            "https://i.dummyjson.com/data/products/1/3.jpg"
           ],
-          "quantity": 1,
-          "user": 1
-        },
-        {
-          "id": 7,
-          "title": "Samsung Galaxy Book",
-          "description": "Samsung Galaxy Book S (2020) Laptop With Intel Lakefield Chip, 8GB of RAM Launched",
-          "price": 1499,
-          "discountPercentage": 4.15,
-          "rating": 4.25,
-          "stock": 50,
-          "brand": "Samsung",
-          "category": "laptops",
-          "thumbnail": "https://i.dummyjson.com/data/products/7/thumbnail.jpg",
-          "images": [
-            "https://i.dummyjson.com/data/products/7/1.jpg",
-            "https://i.dummyjson.com/data/products/7/2.jpg",
-            "https://i.dummyjson.com/data/products/7/3.jpg",
-            "https://i.dummyjson.com/data/products/7/thumbnail.jpg"
-          ],
+          "deleted": true,
           "quantity": 1,
           "user": 1
         }
       ],
-      "totalAmount": 2398,
-      "totalItems": 2,
+      "totalAmount": 544,
+      "totalItems": 1,
       "user": {
         "email": "subu123@gmail.com",
         "password": "Asdf123@",
+        "role": "user",
         "address": [
           {
-            "name": "Subhash Kumar Yadav",
-            "email": "subu123@gmail.com",
-            "phone": "9845406154",
-            "street": "11th main",
-            "city": "Kathmandu",
-            "state": "bagmati",
-            "pinCode": "44600"
-          },
-          {
-            "name": "Subhash Kumar Yadav",
-            "email": "subu123@gmail.com",
-            "phone": "9845406154",
-            "street": "11th main",
-            "city": "Kathmandu",
-            "state": "bagmatiiiiiiiiii",
-            "pinCode": "44600"
-          },
-          {
-            "name": "Subhash Kumar Yadav",
+            "name": "Subhash Kumar Yadavvv",
             "email": "subu123@gmail.com",
             "phone": "9845406154",
             "street": "11th main",
             "city": "Kathmandu",
             "state": "asdasdsa",
             "pinCode": ""
+          },
+          {
+            "name": "Yadav Kumar",
+            "email": "yadavkumar@gmail.com",
+            "phone": "9808780627",
+            "street": "12th main",
+            "city": "Satdobato",
+            "state": "bagmati",
+            "pinCode": "664400"
           }
         ],
         "id": 1
       },
-      "paymentMethod": "card",
+      "paymentMethod": "cash",
       "selectedAddress": {
-        "name": "Subhash Kumar Yadav",
+        "name": "Subhash Kumar Yadavvv",
         "email": "subu123@gmail.com",
         "phone": "9845406154",
         "street": "11th main",
         "city": "Kathmandu",
-        "state": "bagmati",
-        "pinCode": "44600"
+        "state": "asdasdsa",
+        "pinCode": ""
       },
-      "status": "pending",
+      "status": "dispatched",
       "id": 1
     },
     {
@@ -2497,54 +2587,206 @@
           "user": 1
         }
       ],
-      "totalAmount": 899,
+      "totalAmount": 738,
       "totalItems": 1,
       "user": {
         "email": "subu123@gmail.com",
         "password": "Asdf123@",
+        "role": "user",
         "address": [
           {
-            "name": "Subhash Kumar Yadav",
-            "email": "subu123@gmail.com",
-            "phone": "9845406154",
-            "street": "11th main",
-            "city": "Kathmandu",
-            "state": "bagmati",
-            "pinCode": "44600"
-          },
-          {
-            "name": "Subhash Kumar Yadav",
-            "email": "subu123@gmail.com",
-            "phone": "9845406154",
-            "street": "11th main",
-            "city": "Kathmandu",
-            "state": "bagmatiiiiiiiiii",
-            "pinCode": "44600"
-          },
-          {
-            "name": "Subhash Kumar Yadav",
+            "name": "Subhash Kumar Yadavvv",
             "email": "subu123@gmail.com",
             "phone": "9845406154",
             "street": "11th main",
             "city": "Kathmandu",
             "state": "asdasdsa",
             "pinCode": ""
+          },
+          {
+            "name": "Yadav Kumar",
+            "email": "yadavkumar@gmail.com",
+            "phone": "9808780627",
+            "street": "12th main",
+            "city": "Satdobato",
+            "state": "bagmati",
+            "pinCode": "664400"
           }
         ],
         "id": 1
       },
       "paymentMethod": "cash",
       "selectedAddress": {
-        "name": "Subhash Kumar Yadav",
-        "email": "subu123@gmail.com",
-        "phone": "9845406154",
-        "street": "11th main",
-        "city": "Kathmandu",
+        "name": "Yadav Kumar",
+        "email": "yadavkumar@gmail.com",
+        "phone": "9808780627",
+        "street": "12th main",
+        "city": "Satdobato",
         "state": "bagmati",
-        "pinCode": "44600"
+        "pinCode": "664400"
       },
       "status": "pending",
       "id": 2
+    },
+    {
+      "items": [
+        {
+          "id": 10,
+          "title": "HP Pavilion 15-DK1056WM",
+          "description": "HP Pavilion 15-DK1056WM Gaming Laptop 10th Gen Core i5, 8GB, 256GB SSD, GTX 1650 4GB, Windows 10",
+          "price": 1099,
+          "discountPercentage": 6.18,
+          "rating": 4.43,
+          "stock": 89,
+          "brand": "HP Pavilion",
+          "category": "laptops",
+          "thumbnail": "https://i.dummyjson.com/data/products/10/thumbnail.jpeg",
+          "images": [
+            "https://i.dummyjson.com/data/products/10/1.jpg",
+            "https://i.dummyjson.com/data/products/10/2.jpg",
+            "https://i.dummyjson.com/data/products/10/3.jpg",
+            "https://i.dummyjson.com/data/products/10/thumbnail.jpeg"
+          ],
+          "quantity": 1,
+          "user": 1
+        },
+        {
+          "id": 6,
+          "title": "MacBook Pro",
+          "description": "MacBook Pro 2021 with mini-LED display may launch between September, November",
+          "price": 1749,
+          "discountPercentage": 11.02,
+          "rating": 4.57,
+          "stock": 83,
+          "brand": "Apple",
+          "category": "laptops",
+          "thumbnail": "https://i.dummyjson.com/data/products/6/thumbnail.png",
+          "images": [
+            "https://i.dummyjson.com/data/products/6/1.png",
+            "https://i.dummyjson.com/data/products/6/2.jpg",
+            "https://i.dummyjson.com/data/products/6/3.png",
+            "https://i.dummyjson.com/data/products/6/4.jpg"
+          ],
+          "quantity": 1,
+          "user": 1
+        },
+        {
+          "id": 9,
+          "title": "Infinix INBOOK",
+          "description": "Infinix Inbook X1 Ci3 10th 8GB 256GB 14 Win10 Grey – 1 Year Warranty",
+          "price": 1099,
+          "discountPercentage": 11.83,
+          "rating": 4.54,
+          "stock": 96,
+          "brand": "Infinix",
+          "category": "laptops",
+          "thumbnail": "https://i.dummyjson.com/data/products/9/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/9/1.jpg",
+            "https://i.dummyjson.com/data/products/9/2.png",
+            "https://i.dummyjson.com/data/products/9/3.png",
+            "https://i.dummyjson.com/data/products/9/4.jpg",
+            "https://i.dummyjson.com/data/products/9/thumbnail.jpg"
+          ],
+          "quantity": 1,
+          "user": 1
+        }
+      ],
+      "totalAmount": 3556,
+      "totalItems": 3,
+      "user": {
+        "email": "subu123@gmail.com",
+        "password": "Asdf123@",
+        "role": "user",
+        "address": [
+          {
+            "name": "Subhash Kumar Yadavvv",
+            "email": "subu123@gmail.com",
+            "phone": "9845406154",
+            "street": "11th main",
+            "city": "Kathmandu",
+            "state": "asdasdsa",
+            "pinCode": ""
+          },
+          {
+            "name": "Yadav Kumar",
+            "email": "yadavkumar@gmail.com",
+            "phone": "9808780627",
+            "street": "12th main",
+            "city": "Satdobato",
+            "state": "bagmati",
+            "pinCode": "664400"
+          }
+        ],
+        "id": 1
+      },
+      "paymentMethod": "cash",
+      "selectedAddress": {
+        "name": "Yadav Kumar",
+        "email": "yadavkumar@gmail.com",
+        "phone": "9808780627",
+        "street": "12th main",
+        "city": "Satdobato",
+        "state": "bagmati",
+        "pinCode": "664400"
+      },
+      "status": "pending",
+      "id": 3
+    },
+    {
+      "items": [
+        {
+          "id": 1,
+          "title": "i123",
+          "description": "An apple mobile which is nothing like apple",
+          "price": 549,
+          "discountPercentage": 1,
+          "rating": 0,
+          "stock": 94,
+          "brand": "Apple",
+          "category": "smartphones",
+          "thumbnail": "https://i.dummyjson.com/data/products/1/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/1/1.jpg",
+            "https://i.dummyjson.com/data/products/1/2.jpg",
+            "https://i.dummyjson.com/data/products/1/3.jpg"
+          ],
+          "deleted": true,
+          "quantity": 4,
+          "user": 3
+        }
+      ],
+      "totalAmount": 2176,
+      "totalItems": 4,
+      "user": {
+        "email": "test@gmail.com",
+        "password": "Test@123",
+        "address": [
+          {
+            "name": "Ajay mandal",
+            "email": "ajay@gmail.com",
+            "phone": "21324235",
+            "street": "ksdjhfj",
+            "city": "rajbiraj",
+            "state": "madhesh",
+            "pinCode": "5245"
+          }
+        ],
+        "role": "user",
+        "id": 3
+      },
+      "paymentMethod": "cash",
+      "selectedAddress": {
+        "name": "Ajay mandal",
+        "email": "ajay@gmail.com",
+        "phone": "21324235",
+        "street": "ksdjhfj",
+        "city": "rajbiraj",
+        "state": "madhesh",
+        "pinCode": "5245"
+      },
+      "status": "dispatched",
+      "id": 4
     }
   ]
 }

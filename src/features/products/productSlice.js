@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { fetchAllProducts ,fetchProductsByFilters,fetchAllCategories, fetchAllBrand,fetchProductById} from './productAPI';
+import { fetchAllProducts ,fetchProductsByFilters,fetchAllCategories, fetchAllBrand,fetchProductById, createProduct, updateProduct} from './productAPI';
 
 const initialState = {
   products: [],
@@ -15,6 +15,20 @@ export const fetchAllProductsAsync = createAsyncThunk(
   'product/fetchAllProducts',
   async () => {
     const response = await fetchAllProducts();
+    return response.data;
+  }
+);
+export const createProductAsync = createAsyncThunk(
+  'product/createProduct',
+  async (newProduct) => {
+    const response = await createProduct(newProduct);
+    return response.data;
+  }
+);
+export const updateProductAsync = createAsyncThunk(
+  'product/updateProduct',
+  async (update) => {
+    const response = await updateProduct(update);
     return response.data;
   }
 );
@@ -53,9 +67,9 @@ export const productsSlice = createSlice({
   name: 'product',
   initialState,
   reducers: {
-    increment: (state) => {
-      state.value += 1;
-    },
+    clearSelectedProduct:(state)=>{
+      state.selectedProduct = null
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -95,9 +109,29 @@ export const productsSlice = createSlice({
         state.status = 'idle';
         state.selectedProduct = action.payload;
       })
+      .addCase(createProductAsync.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(createProductAsync.fulfilled, (state, action) => {
+        state.status = 'idle';
+        state.products.push(action.payload);
+      })
+      .addCase(updateProductAsync.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(updateProductAsync.fulfilled, (state, action) => {
+        state.status = 'idle';
+        const index = state.products.findIndex((product)=>(product.id === action.payload.id));
+        state.products[index]=action.payload;
+        state.selectedProduct = action.payload;
+
+      })
   },
 });
 
-export const { increment } = productsSlice.actions;
-
+export const { clearSelectedProduct } = productsSlice.actions;
+export const selectBrands = (state)=>state.products.brands;
+export const selectCategories = (state)=>state.products.categories;
+export const selectedProductById = (state)=>state.products.selectedProduct;
+export const selectStatus = (state)=>state.products.status;
 export default productsSlice.reducer;

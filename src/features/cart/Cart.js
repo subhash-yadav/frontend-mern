@@ -1,14 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteItemAsync, selectItems, updateCartAsync } from "./cartSlice";
+import {
+  deleteItemAsync,
+  selectCartStatus,
+  selectItems,
+  updateCartAsync,
+} from "./cartSlice";
+import { discountedPrice } from "../../app/constants";
+import Loader from "../common/Loader";
+import Modal from "../common/Modal";
 
 const Cart = () => {
   const dispatch = useDispatch();
   const items = useSelector(selectItems);
+  const status = useSelector(selectCartStatus);
   const [open, setOpen] = useState(true);
+  const [openModal, setOpenModal] = useState(null);
   const totalAmount = items.reduce(
-    (amount, item) => item.price * item.quantity + amount,
+    (amount, item) => discountedPrice(item) * item.quantity + amount,
     0
   );
   const totalItems = items.reduce((total, item) => item.quantity + total, 0);
@@ -16,13 +26,18 @@ const Cart = () => {
   const handleQuantity = (e, item) => {
     dispatch(updateCartAsync({ ...item, quantity: +e.target.value }));
   };
+  const handleRemove = (e, id) => {
+    dispatch(deleteItemAsync(id));
+  };
   return (
     <>
-    {!items.length && <Navigate to={"/"}/>}
+      {!items.length && <Navigate to={"/"} />}
+
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <h2 className="text-4xl mx-auto max-w-7xl py-4 sm:px-6 lg:px-8">
           Cart
         </h2>
+        {status === "loading" && <Loader />}
         <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
           <div className="flow-root">
             <ul role="list" className="-my-6 divide-y divide-gray-200">
@@ -42,7 +57,7 @@ const Cart = () => {
                         <h3>
                           <a href={item.href}>{item.title}</a>
                         </h3>
-                        <p className="ml-4">$ {item.price}</p>
+                        <p className="ml-4">$ {discountedPrice(item)}</p>
                       </div>
                       <p className="mt-1 text-sm text-gray-500">{item.brand}</p>
                     </div>
@@ -65,8 +80,17 @@ const Cart = () => {
                       </div>
 
                       <div className="flex">
+                        <Modal
+                          title={`Delete ${item.title}`}
+                          message="Are you Sure You want to Delete this Item"
+                          dangerOption="Delete"
+                          cancelOption="Cancel"
+                          dangerAction={(e) => handleRemove(e, item.id)}
+                          cancelAction={()=>setOpenModal(-1)}
+                          showModal={openModal === item.id}
+                        />
                         <button
-                          onClick={() => dispatch(deleteItemAsync(item.id))}
+                          onClick={() => setOpenModal(item.id)}
                           type="button"
                           className="font-medium text-indigo-600 hover:text-indigo-500"
                         >

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Home from "./pages/Home";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
@@ -18,7 +18,18 @@ import UserProfilePage from "./pages/UserProfilePage";
 import { fetchLoggedInUserAsync } from "./features/user/userSlice";
 import Logout from "./features/auth/components/Logout";
 import ForgetPasswordPage from "./pages/ForgetPasswordPage";
-
+import AdminHome from "./pages/AdminHome";
+import ProtectedAdmin from "./features/auth/components/ProtectedAdmin";
+import AdminProductDetailPage from "./pages/AdminProductDetailPage";
+import AdminProductFormPage from "./pages/AdminProductFormPage";
+import AdminOrderPage from "./pages/AdminOrderPage";
+import { positions, Provider } from "react-alert";
+import AlertTemplate from "react-alert-template-basic";
+import Footer from "./features/common/Footer";
+const options = {
+  timeout: 5000,
+  position: positions.BOTTOM_LEFT,
+};
 const router = createBrowserRouter([
   {
     path: "/",
@@ -26,6 +37,38 @@ const router = createBrowserRouter([
       <Protected>
         <Home />
       </Protected>
+    ),
+  },
+  {
+    path: "/admin",
+    element: (
+      <ProtectedAdmin>
+        <AdminHome />
+      </ProtectedAdmin>
+    ),
+  },
+  {
+    path: "/admin/order",
+    element: (
+      <ProtectedAdmin>
+        <AdminOrderPage />
+      </ProtectedAdmin>
+    ),
+  },
+  {
+    path: "/admin/product-form",
+    element: (
+      <ProtectedAdmin>
+        <AdminProductFormPage />
+      </ProtectedAdmin>
+    ),
+  },
+  {
+    path: "/admin/product-form/edit/:id",
+    element: (
+      <ProtectedAdmin>
+        <AdminProductFormPage />
+      </ProtectedAdmin>
     ),
   },
   {
@@ -61,29 +104,37 @@ const router = createBrowserRouter([
     ),
   },
   {
+    path: "/admin/product-detail/:id",
+    element: (
+      <ProtectedAdmin>
+        <AdminProductDetailPage />
+      </ProtectedAdmin>
+    ),
+  },
+  {
     path: "/order-success/:id",
     element: (
-      <>
+      <Protected>
         <OrderSuccessPage />
-      </>
+      </Protected>
     ),
   },
   {
     path: "/orders",
     element: (
-      <>
+      <Protected>
         <UserOrderPage />
         {/* //we will add page later right now using component directly */}
-      </>
+      </Protected>
     ),
   },
   {
     path: "/profile",
     element: (
-      <>
+      <Protected>
         <UserProfilePage />
         {/* //we will add page later right now using component directly */}
-      </>
+      </Protected>
     ),
   },
   {
@@ -120,12 +171,16 @@ function App() {
   useEffect(() => {
     if (user) {
       dispatch(fetchItemsByUserIdAsync(user.id));
-      dispatch(fetchLoggedInUserAsync(user.id))
+      dispatch(fetchLoggedInUserAsync(user.id));
     }
   }, [dispatch, user]);
   return (
     <>
-      <RouterProvider router={router} />
+      <Provider template={AlertTemplate} {...options}>
+        <RouterProvider router={router} />
+      </Provider>
+      
+      <Footer/>
     </>
   );
 }
