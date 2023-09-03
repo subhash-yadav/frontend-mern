@@ -4,14 +4,18 @@ import { useForm } from "react-hook-form";
 import { checkUserAsync, selectError, selectLoggedInUser } from "../authSlice";
 import { useDispatch, useSelector } from "react-redux";
 const Login = () => {
-
-  const {register,handleSubmit, formState: { errors }} = useForm();
-  const dispatch = useDispatch()
-  const error = useSelector(selectError)
-  const user = useSelector(selectLoggedInUser)
+  
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const dispatch = useDispatch();
+  const error = useSelector(selectError);
+  const user = useSelector(selectLoggedInUser);
   return (
     <>
-    {user && <Navigate to={"/"} replace={true}></Navigate>}
+      {user && <Navigate to={"/"} replace={true}></Navigate>}
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
@@ -25,9 +29,15 @@ const Login = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form className="space-y-6" noValidate onSubmit={handleSubmit((data)=>{
-            dispatch(checkUserAsync({email:data.email,password:data.password}))
-          })}>
+          <form
+            className="space-y-6"
+            noValidate
+            onSubmit={handleSubmit((data) => {
+              dispatch(
+                checkUserAsync({ email: data.email, password: data.password })
+              );
+            })}
+          >
             <div>
               <label
                 htmlFor="email"
@@ -38,11 +48,21 @@ const Login = () => {
               <div className="mt-2">
                 <input
                   id="email"
-                  {...register("email",{required:"email required",pattern:{value:/\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi,message:"email not valid"}})}
-                  type="email"                  
+                  {...register("email", {
+                    required: "email required",
+                    pattern: {
+                      value: /\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi,
+                      message: "email not valid",
+                    },
+                  })}
+                  type="email"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
-                {errors.email && <span className="text-red-500 text-base">*{errors.email.message}</span>}
+                {errors.email && (
+                  <span className="text-red-500 text-base">
+                    *{errors.email.message}
+                  </span>
+                )}
               </div>
             </div>
 
@@ -66,14 +86,25 @@ const Login = () => {
               <div className="mt-2">
                 <input
                   id="password"
-                  {...register("password",{required:"password required",pattern:{value:/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm,message:`-at least 8 characters
+                  {...register("password", {
+                    required: "password required",
+                    pattern: {
+                      value:
+                        /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm,
+                      message: `-at least 8 characters
                   -must contain at least 1 uppercase letter and 1 number
-                  -can contain special character`}})}
+                  -can contain special character`,
+                    },
+                  })}
                   type="password"
-                  autoComplete="true"             
+                  autoComplete="true"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
-                {errors.password && <span className="text-red-500 text-base">*{errors.password.message}</span>}
+                {errors.password && (
+                  <span className="text-red-500 text-base">
+                    *{errors.password.message}
+                  </span>
+                )}
               </div>
             </div>
 
@@ -84,7 +115,9 @@ const Login = () => {
               >
                 Sign in
               </button>
-              {error && <p className="text-center text-red-500">{error.message}</p>}
+              {error && (
+                <p className="text-center text-red-500">{error.message}</p>
+              )}
             </div>
           </form>
 

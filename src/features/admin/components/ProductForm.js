@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
+import { useAlert } from 'react-alert'
 import {
   clearSelectedProduct,
   createProductAsync,
@@ -14,6 +15,7 @@ import { useParams } from "react-router-dom";
 import Modal from "../../common/Modal";
 const ProductForm = () => {
   const dispatch = useDispatch();
+  const alert = useAlert();
   const { id } = useParams();
 
   const brands = useSelector(selectBrands);
@@ -78,8 +80,11 @@ const ProductForm = () => {
                 rating: product.rating || 0,
               })
             );
+            alert.success('Product updated')
+            reset()
           } else {
             dispatch(createProductAsync(product));
+            alert.success('New Product Created')
             reset();
           }
           reset();
@@ -92,7 +97,7 @@ const ProductForm = () => {
             </h2>
 
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-              {selectedProduct.deleted && <h2 className="text-red-500">This Product is Deleted</h2>}
+              {selectedProduct && selectedProduct.deleted && <h2 className="text-red-500">This Product is Deleted</h2>}
               <div className="sm:col-span-6">
                 <label
                   htmlFor="username"
@@ -497,7 +502,7 @@ const ProductForm = () => {
           </button>
         </div>
       </form>
-      <Modal
+      {selectedProduct && <Modal
         title={`Delete ${selectedProduct.title}`}
         message="Are you Sure You want to Delete this Product"
         dangerOption="Delete"
@@ -505,7 +510,7 @@ const ProductForm = () => {
         dangerAction={handleDelete}
         cancelAction={() => setOpenModal(null)}
         showModal={openModal}
-      />
+      />}
     </div>
   );
 };

@@ -2,13 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
 import { StarIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { ITEMS_PER_PAGE, discountedPrice } from "../../../app/constants";
-import {
-  ChevronDownIcon,
-  FunnelIcon,
-  MinusIcon,
-  PlusIcon,
-  Squares2X2Icon,
-} from "@heroicons/react/20/solid";
+import {ChevronDownIcon,FunnelIcon,MinusIcon,PlusIcon,Squares2X2Icon} from "@heroicons/react/20/solid";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -36,11 +30,11 @@ function classNames(...classes) {
 const ProductList = () => {
   const dispatch = useDispatch();
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
-  const status = useSelector(selectStatus)
+  const status = useSelector(selectStatus);
   const { products, totalItems, categories, brands } = useSelector(
     (state) => state.products
   );
- 
+
   const filters = [
     {
       id: "category",
@@ -98,16 +92,16 @@ const ProductList = () => {
     dispatch(fetchAllBrandAsync());
     dispatch(fetchAllCategoriesAsync());
   }, [dispatch]);
-  
-  const [query,setQuery] = useState("")
-  console.log(query)
-  const key = ['title',"category","brand"]
-  const search = (data)=>{
-    return data.filter((item)=> key.some(key=>item[key].toLowerCase().includes(query)))
-  }
-   return (
+
+  const [query, setQuery] = useState("");
+  const key = ["title", "category", "brand"];
+  const search = (data) => {
+    return data.filter((item) =>
+      key.some((key) => item[key].toLowerCase().includes(query))
+    );
+  };
+  return (
     <>
-    
       <div className="bg-white">
         <div>
           {/* Mobile filter dialog */}
@@ -123,7 +117,12 @@ const ProductList = () => {
               <h1 className="text-4xl font-bold tracking-tight text-gray-900">
                 All Products
               </h1>
-              <input type="text" onChange={(e)=>setQuery(e.target.value)} className="rounded-full w-1/2 hidden md:block" placeholder="Search..."/>
+              <input
+                type="text"
+                onChange={(e) => setQuery(e.target.value)}
+                className="rounded-full w-1/2 hidden md:block"
+                placeholder="Search..."
+              />
               <div className="flex items-center">
                 <Menu as="div" className="relative inline-block text-left">
                   <div>
@@ -197,7 +196,7 @@ const ProductList = () => {
                 {/* Filters */}
                 <DesktopFilter handleFilter={handleFilter} filters={filters} />
 
-                <ProductGrid  products={search(products)} status={status}/>
+                <ProductGrid products={search(products)} status={status} />
               </div>
             </section>
 
@@ -396,7 +395,7 @@ function DesktopFilter({ handleFilter, filters }) {
 }
 
 //Pagination
-function ProductGrid({ products ,status}) {
+function ProductGrid({ products, status }) {
   return (
     <>
       {/* Product grid start*/}
@@ -404,9 +403,7 @@ function ProductGrid({ products ,status}) {
         <div className="bg-white">
           <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-0 lg:max-w-7xl lg:px-8">
             <div className="mt-6 grid grid-cols-1 gap-x-4 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
-              {
-                status === "loading" && <Loader/>
-              }
+              {status === "loading" && <Loader />}
               {products.map((product) => (
                 <Link to={`/product-detail/${product.id}`} key={product.id}>
                   <div className="group relative border border-1 border-gray-200 p-2 rounded-md">
@@ -445,8 +442,8 @@ function ProductGrid({ products ,status}) {
                       </div>
                     </div>
                     {product.stock <= 0 && (
-                        <p className="text-red-500 text-sm">Out of Stock</p>
-                      )}
+                      <p className="text-red-500 text-sm">Out of Stock</p>
+                    )}
                   </div>
                 </Link>
               ))}

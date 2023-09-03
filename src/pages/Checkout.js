@@ -29,13 +29,13 @@ const Checkout = () => {
 
   const [open, setOpen] = useState(true);
   const totalAmount = items.reduce(
-    (amount, item) => discountedPrice(item) * item.quantity + amount,
+    (amount, item) => discountedPrice(item.product) * item.quantity + amount,
     0
   );
 
   const totalItems = items.reduce((total, item) => item.quantity + total, 0);
   const handleQuantity = (e, item) => {
-    dispatch(updateCartAsync({ ...item, quantity: +e.target.value }));
+    dispatch(updateCartAsync({ id:item.id, quantity: +e.target.value }));
   };
 
   const [selectedAddress, setSelectedAddress] = useState(null);
@@ -55,7 +55,7 @@ const Checkout = () => {
         items: items,
         totalAmount: totalAmount,
         totalItems: totalItems,
-        user: user,
+        user: user.id,
         paymentMethod: payment,
         selectedAddress: selectedAddress,
         status:"pending" //other status can be delivered , received
@@ -80,6 +80,7 @@ const Checkout = () => {
             <form
               noValidate
               onSubmit={handleSubmit((data) => {
+                console.log(data)
                 dispatch(
                   updateUserAsync({ ...user, address: [...user.address, data] })
                 );
@@ -393,8 +394,8 @@ const Checkout = () => {
                       <li key={item.id} className="flex py-6">
                         <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                           <img
-                            src={item.thumbnail}
-                            alt={item.title}
+                            src={item.product.thumbnail}
+                            alt={item.product.title}
                             className="h-full w-full object-cover object-center"
                           />
                         </div>
@@ -403,12 +404,12 @@ const Checkout = () => {
                           <div>
                             <div className="flex justify-between text-base font-medium text-gray-900">
                               <h3>
-                                <a href={item.href}>{item.title}</a>
+                                <a href={item.product.href}>{item.product.title}</a>
                               </h3>
                               <p className="ml-4">$ {discountedPrice(item)}</p>
                             </div>
                             <p className="mt-1 text-sm text-gray-500">
-                              {item.brand}
+                              {item.product.brand}
                             </p>
                           </div>
                           <div className="flex flex-1 items-end justify-between text-sm">
@@ -432,7 +433,7 @@ const Checkout = () => {
                             <div className="flex">
                               <button
                                 onClick={() =>
-                                  dispatch(deleteItemAsync(item.id))
+                                  dispatch(deleteItemAsync(item.product.id))
                                 }
                                 type="button"
                                 className="font-medium text-indigo-600 hover:text-indigo-500"

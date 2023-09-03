@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {fetchProductByIdAsync} from "../../products/productSlice"
 import { Link, useParams } from "react-router-dom";
 import { addToCartAsync } from "../../cart/cartSlice";
-import { selectLoggedInUser } from "../../auth/authSlice";
 import { discountedPrice } from "../../../app/constants";
 
 //TODO In server data we will add colors, size, highlights. to each products
@@ -41,7 +40,6 @@ const AdminProductDetail = () => {
   const [selectedColor, setSelectedColor] = useState(colors[0]);
   const [selectedSize, setSelectedSize] = useState(sizes[2]);
   const {selectedProduct} = useSelector((state)=>state.products);
- const user = useSelector(selectLoggedInUser)
   useEffect(()=>{
     dispatch(fetchProductByIdAsync(id))
   },[dispatch,id])
@@ -50,7 +48,7 @@ const AdminProductDetail = () => {
 const handleCart = (e) =>{
   e.preventDefault();
   e.stopPropagation()
-  const newItem = {...selectedProduct,quantity:1,user:user.id}
+  const newItem = {...selectedProduct,quantity:1}
   delete newItem[id];
   if(selectedProduct){
     dispatch(addToCartAsync(newItem))

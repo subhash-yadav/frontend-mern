@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { updateUserAsync } from "../../auth/authSlice";
 import { updateUserAsync } from "../userSlice";
 import { useForm } from "react-hook-form";
 import { selectUserInfo } from "../userSlice";
 const UserProfile = () => {
   const dispatch = useDispatch();
-  const user = useSelector(selectUserInfo);
+  const userInfo = useSelector(selectUserInfo);
   const {
     register,
     setValue,
@@ -23,7 +22,7 @@ const UserProfile = () => {
   const [selectedEditIndex, setSelectedEditIndex] = useState(-1);
   const handleEditForm = (e, index) => {
     setSelectedEditIndex(index);
-    const address = user.address[index];
+    const address = userInfo.address[index];
     setValue("name", address.name);
     setValue("email", address.email);
     setValue("phone", address.phone);
@@ -33,13 +32,13 @@ const UserProfile = () => {
     setValue("pinCode", address.pinCode);
   };
   const handleEdit = (addressUpdate, index) => {
-    const newUser = { ...user, address: [...user.address] }; // for shallow copy issue;
+    const newUser = { ...userInfo, address: [...userInfo.address] }; // for shallow copy issue;
     newUser.address.splice(index, 1, addressUpdate);
     dispatch(updateUserAsync(newUser));
     setSelectedEditIndex(-1);
   };
   const handleRemove = (e, index) => {
-    const newUser = { ...user, address: [...user.address] }; // for shallow copy issue;
+    const newUser = { ...userInfo, address: [...userInfo.address] }; // for shallow copy issue;
     newUser.address.splice(index, 1);
     dispatch(updateUserAsync(newUser));
   };
@@ -49,13 +48,13 @@ const UserProfile = () => {
       {/* {!orders.length && <Navigate to="/" />} */}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 border shadow-lg  mt-6">
         <h2 className="text-4xl font-bold mx-auto max-w-7xl py-4 sm:px-0 lg:px-0">
-          Name: {user.name ? user.name : "New User"}
+          Name: {userInfo?.name ? userInfo?.name : "New User"}
         </h2>
         <p className="pb-4 text-red-900 text-2xl font-bold">
-          Email: {user.email}
+          Email: {userInfo.email}
         </p>
-        {user.role === "admin" && <p className="pb-4 text-red-900 text-2xl font-bold">
-          Role: {user.role}
+        {userInfo.role === "admin" && <p className="pb-4 text-red-900 text-2xl font-bold">
+          Role: {userInfo.role}
         </p>}
 
         <div className="border-b border-gray-900/10 pb-12">
@@ -77,8 +76,8 @@ const UserProfile = () => {
                 onSubmit={handleSubmit((data) => {
                   dispatch(
                     updateUserAsync({
-                      ...user,
-                      address: [...user.address, data],
+                      ...userInfo,
+                      address: [...userInfo.address, data],
                     })
                   );
                   reset();
@@ -280,8 +279,8 @@ const UserProfile = () => {
           </div>
 
           <div className="divide-y divide-gray-100">
-            {user.address &&
-              user.address.map((address, index) => (
+            {userInfo.address &&
+              userInfo.address.map((address, index) => (
                 <div key={index}>
                   <div className="py-4 border-t">
                     <div className="py-4">

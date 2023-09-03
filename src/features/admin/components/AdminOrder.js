@@ -125,14 +125,14 @@ const AdminOrder = () => {
                           <div key={i} className="flex items-center my-2">
                             <div className="mr-2">
                               <img
-                                alt={item.title}
+                                alt={item.product.title}
                                 className="w-10 h-10 rounded-full object-cover"
-                                src={item.thumbnail}
+                                src={item.product.thumbnail}
                               />
                             </div>
                             <span>
-                              {item.title} - #{item.quantity} - $
-                              {discountedPrice(item)}
+                              {item.product.title} - #{item.quantity} - $
+                              {discountedPrice(item.product)}
                             </span>
                           </div>
                         ))}

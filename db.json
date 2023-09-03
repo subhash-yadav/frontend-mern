@@ -2383,6 +2383,42 @@
           "city": "rajbiraj",
           "state": "madhesh",
           "pinCode": "5245"
+        },
+        {
+          "name": "okhati assignment",
+          "email": "admin@gmail.com",
+          "phone": "+9779845406154",
+          "street": "ksdjhfj",
+          "city": "rajbiraj",
+          "state": "madhesh",
+          "pinCode": "5245"
+        },
+        {
+          "name": "subu",
+          "email": "test@gmail.com",
+          "phone": "+9779845406154",
+          "street": "ksdjhfj",
+          "city": "rajbiraj",
+          "state": "madhesh",
+          "pinCode": "5245"
+        },
+        {
+          "name": "yadav",
+          "email": "test@gmail.com",
+          "phone": "+9779845406154",
+          "street": "ksdjhfj",
+          "city": "rajbiraj",
+          "state": "madhesh",
+          "pinCode": "5245"
+        },
+        {
+          "name": "kumar yadav",
+          "email": "yadav1subhashkumar@gmail.com",
+          "phone": "21324235",
+          "street": "dsasdad",
+          "city": "sdada",
+          "state": "asdadaasdad",
+          "pinCode": "5245"
         }
       ],
       "role": "user",
@@ -2438,6 +2474,26 @@
       "user": 2
     },
     {
+      "id": 5,
+      "title": "Huawei P30000",
+      "description": "Huawei’s re-badged P30 Pro New Edition was officially unveiled yesterday in Germany and now the device has made its way to the UK.",
+      "price": 4990000000000,
+      "discountPercentage": 1,
+      "rating": 4.09,
+      "stock": 32,
+      "brand": "Huawei",
+      "category": "smartphones",
+      "thumbnail": "https://i.dummyjson.com/data/products/5/thumbnail.jpg",
+      "images": [
+        "https://i.dummyjson.com/data/products/5/1.jpg",
+        "https://i.dummyjson.com/data/products/5/2.jpg",
+        "https://i.dummyjson.com/data/products/5/3.jpg"
+      ],
+      "deleted": true,
+      "quantity": 1,
+      "user": 3
+    },
+    {
       "id": 9,
       "title": "Infinix INBOOK",
       "description": "Infinix Inbook X1 Ci3 10th 8GB 256GB 14 Win10 Grey – 1 Year Warranty",
@@ -2474,26 +2530,6 @@
         "https://i.dummyjson.com/data/products/10/2.jpg",
         "https://i.dummyjson.com/data/products/10/3.jpg",
         "https://i.dummyjson.com/data/products/10/thumbnail.jpeg"
-      ],
-      "quantity": 1,
-      "user": 3
-    },
-    {
-      "id": 11,
-      "title": "perfume Oil",
-      "description": "Mega Discount, Impression of Acqua Di Gio by GiorgioArmani concentrated attar perfume Oil",
-      "price": 13,
-      "discountPercentage": 8.4,
-      "rating": 4.26,
-      "stock": 65,
-      "brand": "Impression of Acqua Di Gio",
-      "category": "fragrances",
-      "thumbnail": "https://i.dummyjson.com/data/products/11/thumbnail.jpg",
-      "images": [
-        "https://i.dummyjson.com/data/products/11/1.jpg",
-        "https://i.dummyjson.com/data/products/11/2.jpg",
-        "https://i.dummyjson.com/data/products/11/3.jpg",
-        "https://i.dummyjson.com/data/products/11/thumbnail.jpg"
       ],
       "quantity": 1,
       "user": 3
